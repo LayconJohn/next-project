@@ -1,6 +1,4 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import Link from 'next/link';
 import Layout, { siteTitle, name } from '../components/layout/layout';
 import utilStyle from "../styles/utils.module.css"
 
