@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
-import Layout, { siteTitle } from '../components/layout';
+import Layout, { siteTitle, name } from '../components/layout/layout';
 import utilStyle from "../styles/utils.module.css"
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
 
       <section className={utilStyle.headingMd}>
-        <p>Esse é o primeiro projeto Next, vamobora!</p>
+        <p>Olá! Me chamo {name}!! Esse é meu primeiro projeto em Next.js a partir da documentação oficial</p>
         <p>
           (Baseado na{' '}
           <a href="https://nextjs.org/learn">documentação oficial no Next.js</a>.)

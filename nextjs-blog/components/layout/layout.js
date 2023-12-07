@@ -4,7 +4,7 @@ import Image from "next/image";
 import utilStyle from "../styles/utils.module.css";
 import Link from "next/link";
 
-const name = "John";
+export const name = "John";
 export const siteTitle = "Meu app Next doidera"
 
 export default function Layout({ children, home }) {
@@ -30,7 +30,7 @@ export default function Layout({ children, home }) {
                             <>
                             <Image 
                                 priority
-                                src="public/images/profile.jpg"
+                                src="/images/profile.jpg"
                                 className={utilStyle.borderCircle}
                                 height={144}
                                 width={144}
@@ -45,7 +45,7 @@ export default function Layout({ children, home }) {
                     <Link href="/">
                         <Image 
                             priority
-                            src="public/images/profile.jpg"
+                            src="/images/profile.jpg"
                             className={utilStyle.borderCircle}
                             height={144}
                             width={144}
