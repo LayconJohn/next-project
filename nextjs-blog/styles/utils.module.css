@@ -45,6 +45,16 @@
 
 .listItem {
     margin: 0 0 1.25rem;
+    width: 100wh;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 3.1rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.listItem:hover {
+    scale: 1.1;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .lightText {
