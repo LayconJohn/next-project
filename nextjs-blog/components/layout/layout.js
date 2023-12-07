@@ -1,7 +1,7 @@
 import styles from "./layout.module.css";
 import Head from "next/head";
 import Image from "next/image";
-import utilStyle from "../styles/utils.module.css";
+import utilStyle from "../../styles/utils.module.css";
 import Link from "next/link";
 
 export const name = "John";
