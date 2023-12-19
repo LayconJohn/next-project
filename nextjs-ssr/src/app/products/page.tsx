@@ -1,3 +1,8 @@
+async function getProducts() {
+    const response = await fetch('http://localhost:8000/products')
+    const data = await response.json()
+}
+
 export default function ProductsPage(){
     return (
         <div className="m-2">
