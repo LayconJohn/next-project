@@ -1,9 +1,17 @@
-async function getProducts() {
-    const response = await fetch('http://localhost:8000/products')
-    const data = await response.json()
+import { PaginationProduct, Product } from "@/models"
+import Image from "next/image"
+
+async function getProducts(): Promise<PaginationProduct> {
+    const response = await fetch('http://localhost:8000/products', {
+        next: {
+            revalidate: 10,
+        }
+    })
+    return await response.json()
 }
 
-export default function ProductsPage(){
+async function ProductsPage(){
+    const products = await getProducts()
     return (
         <div className="m-2">
             <form>
@@ -21,17 +29,27 @@ export default function ProductsPage(){
             <div className="container mt-8">
                 <h1 className="text-2xl font-bold">Lista de produtos</h1>
                 <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className=" bg-white p-4 rounded shadow">
-                        <img/>
-                        <h2 className=" text-lg text-black font-semibold">
-                            nome produto
-                        </h2>
-                        <div className=" font-bold text-blue-600 font-bold">
-                            R$ 10,00
+                    {products.products.map((product, index) => (
+                        <div className=" bg-white p-4 rounded shadow" key={index}>
+                            <Image src={product.image_url} alt={product.name} width={150} height={150}/>
+                            <h2 className=" text-lg text-black font-semibold">
+                                {product.name}
+                            </h2>
+                            <div className=" font-bold text-blue-600">
+                                {
+                                    Intl.NumberFormat("pt-BR", {
+                                        style: "currency",
+                                        currency: "BRL",
+                                    }).format(product.price)
+                                }
+                            </div>
                         </div>
-                    </div>
+                    ))}
+
                 </div>
             </div>
         </div>
     )
 }
+
+export default ProductsPage;

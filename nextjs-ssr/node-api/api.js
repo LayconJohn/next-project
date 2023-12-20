@@ -19,12 +19,12 @@ app.get("/products", async (req, res) => {
         const filteredProducts = products.filter(product => product.name.toLowerCase().includes(name));
 
         
-    const slicedProducts = filteredProducts.slice(offset, end);
+        const slicedProducts = filteredProducts.slice(offset, end);
 
-    return res.status(200).json({
-        products: slicedProducts,
-        total: products.length
-    })
+        return res.status(200).json({
+            products: slicedProducts,
+            total: products.length
+        })
 
     }
 
