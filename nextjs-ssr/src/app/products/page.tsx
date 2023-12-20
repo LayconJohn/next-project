@@ -1,8 +1,14 @@
 import { PaginationProduct, Product } from "@/models"
 import Image from "next/image"
 
-async function getProducts(): Promise<PaginationProduct> {
-    const response = await fetch('http://localhost:8000/products', {
+async function getProducts({ name }: {name?: string}): Promise<PaginationProduct> {
+    const searchParams = new URLSearchParams();
+
+    if(name) {
+        searchParams.append("name", name);
+    }
+
+    const response = await fetch(`http://localhost:8000/products?${searchParams}`, {
         next: {
             revalidate: 10,
         }
@@ -10,15 +16,19 @@ async function getProducts(): Promise<PaginationProduct> {
     return await response.json()
 }
 
-async function ProductsPage(){
-    const products = await getProducts()
+async function ProductsPage({ searchParams }:  {searchParams: { name?: string}}){
+    const { name } = searchParams;
+    const products = await getProducts({ name })
+
     return (
         <div className="m-2">
-            <form>
+            <form action="/products" method="get">
                 <input 
+                    className=" text-black"
                     type="search"
                     placeholder="Pesquisar..."
                     name="name"
+                    defaultValue={name}
                 />
                 <button
                     type="submit"
@@ -31,7 +41,7 @@ async function ProductsPage(){
                 <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
                     {products.products.map((product, index) => (
                         <div className=" bg-white p-4 rounded shadow" key={index}>
-                            <Image src={product.image_url} alt={product.name} width={150} height={150}/>
+                            <img src={product.image_url} alt={product.name} width={150} height={150}/>
                             <h2 className=" text-lg text-black font-semibold">
                                 {product.name}
                             </h2>
