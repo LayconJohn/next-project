@@ -1,8 +1,10 @@
+import Loading from "@/components/Loading";
 import { ProductList } from "@/components/ProductList";
 import { PaginationProduct, Product } from "@/models"
 import { makeSearchLink } from "@/utils";
 import Image from "next/image"
 import Link from "next/link";
+import { Suspense } from "react";
 
 
 
@@ -30,8 +32,10 @@ async function ProductsPage({ searchParams }:  {searchParams: { name?: string, p
             </form>
             <div className="container mt-8">
                 <h1 className="text-2xl font-bold">Lista de produtos</h1>
-
-                <ProductList name={name} page={page}/>
+                <Suspense fallback={<Loading />}>
+                    <ProductList name={name} page={page}/>
+                </Suspense>
+                
             </div>
         </div>
     )
