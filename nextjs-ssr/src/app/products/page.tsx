@@ -10,11 +10,14 @@ async function getProducts({ name, page }: {name?: string, page?: number}): Prom
     if(page) searchParams.append("page", page.toString())
 
     const response = await fetch(`http://localhost:8000/products?${searchParams}`, {
+        cache: "no-store",
+        /* 
         next: {
             revalidate: 10,
         }
+        */
     })
-    return await response.json()
+    return await response.json();
 }
 
 function makeSearchLink({ name, page }: { name?: string, page?: number }) {
